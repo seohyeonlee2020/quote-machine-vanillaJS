@@ -1,0 +1,29 @@
+body{
+	background-color: black;
+	font-family:  monospace;
+  }
+
+  #quote-box{
+	background-color: white;
+	margin: auto;
+	padding: 70px 0;
+	width: 50%;
+	height: 50%;
+	text-align: center;
+	border: 1px solid;
+
+  }
+
+  #text{
+	font-size: 25px;
+	margin: 30px;
+  }
+
+ button{
+	background-color: black;
+	border: 1px solid;
+	color: white;
+	margin: 10px;
+	padding: 10px;
+	font-family: monospace;
+  }
