@@ -22,19 +22,36 @@ const getJsonData = async (src) => {
 		console.log(err)
 	}
 }
-getJsonData(src);
+
+//check if localstorage is empty
+let localStorageQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
+if (localStorageQuotes.length = ""){
+	getJsonData(src);
+}
 
 const quoteInput = document.getElementById("quote-input");
 const sourceInput = document.getElementById("source-input");
 const addQuoteBtn = document.getElementById("add-quote");
 
-const processInput = () => {
+const processInput = (e) => {
+	//if you don't do this the page resets and you can't add values
+	e.preventDefault();
+
 	console.log("processInput called", `quote: ${quoteInput.value}, source: ${sourceInput.value}`)
 	//get quotes from local storage
 	let localStorageQuotes = JSON.parse(localStorage.getItem("quotes"));
 	console.log(localStorageQuotes, "from local storage")
 
 	//add input to local storage
+	let quoteInputVal = quoteInput.value.trim();
+	let sourceInputVal = sourceInput.value.trim();
+
+	//input validation
+
+	if(!quoteInputVal){
+		alert("quote must not be empty")
+		return;
+	}
 	let quoteObj = {id: '', quote: '', source: ''};
 	quoteObj.quote = quoteInput.value? quoteInput.value: "Empty quote";
 	quoteObj.source = sourceInput.value? sourceInput.value : "Unknown";
@@ -46,6 +63,9 @@ const processInput = () => {
 	localStorage.setItem("quotes", JSON.stringify(localStorageQuotes));
 	console.log(JSON.parse(localStorage.getItem("quotes")), "check for added quote")
 }
+
+//add ways to search, edit, and delete quotes
+
 
 const fillQuote = () => {
 	//populate text and author from random selectio
@@ -61,4 +81,4 @@ const fillQuote = () => {
   }
 
 quoteBtn.addEventListener("click", fillQuote);
-addQuoteBtn.addEventListener("submit", processInput);
+addQuoteBtn.addEventListener("click", processInput);
